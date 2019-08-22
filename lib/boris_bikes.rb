@@ -2,9 +2,7 @@
 class DockingStation
   attr_reader :bike
 
-  def station_full?
-    true #bikes_docked == capacity
-  end
+
 
   def release_bike
     fail "No Bikes available" unless @bike
@@ -12,7 +10,7 @@ class DockingStation
   end
 
   def dock_bike(live_bike)
-    fail "Unable to dock: docking station full" if station_full?
+    fail "Unable to dock: docking station full" if @bike
     @bike = live_bike
   end
 
