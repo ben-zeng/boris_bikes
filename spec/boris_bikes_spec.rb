@@ -1,12 +1,15 @@
 require_relative "../lib/boris_bikes"
 
 describe DockingStation do
+
+  #let(:bike) { Bike.new }
+
   it "responded to release_bike method" do
-    expect(DockingStation.new).to respond_to(:release_bike)
+    expect(subject).to respond_to(:release_bike)
   end
 
   it "Docking Station responds to working?" do
-    expect((DockingStation.new).release_bike).to respond_to(:working?)
+    expect(DockingStation.new.release_bike).to respond_to(:working?)
   end
 
   it "Docking Station gets a working bike" do
@@ -39,10 +42,10 @@ describe DockingStation do
     end
 
   it "Raise error if docking station at capacity" do
+      station = DockingStation.new
       bike = Bike.new
-      expect{DockingStation.new.dock_bike(bike)}.to raise_error("Unable to dock: docking station full")
+      station.dock_bike(bike)
+      expect{station.dock_bike(bike)}.to raise_error("Unable to dock: docking station full")
       end
-
-
 
   end
