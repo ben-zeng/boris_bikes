@@ -9,12 +9,17 @@ describe DockingStation do
   end
 
   it "Docking Station responds to working?" do
-    expect(DockingStation.new.release_bike).to respond_to(:working?)
+    station = DockingStation.new
+    bike = Bike.new
+    station.dock_bike(bike)
+    expect(station.release_bike).to respond_to(:working?)
   end
 
   it "Docking Station gets a working bike" do
-    expect((DockingStation.new).release_bike.working?).to eq(true)
-
+    station = DockingStation.new
+    bike = Bike.new
+    station.dock_bike(bike)
+    expect(station.release_bike.working?).to eq(true)
   end
 
   it "responds to dock_bike" do
@@ -31,10 +36,9 @@ describe DockingStation do
   end
 
   it "returns docked bikes" do
+    station = DockingStation.new
     bike = Bike.new
-    a = (DockingStation.new)
-    a.dock_bike(bike)
-    expect(a.bike).to eq bike
+    expect(station.dock_bike(bike)).to eq bike
   end
 
   it "Raise error if no bikes at docking station" do
@@ -44,7 +48,7 @@ describe DockingStation do
   it "Raise error if docking station at capacity" do
       station = DockingStation.new
       bike = Bike.new
-      station.dock_bike(bike)
+      20.times{station.dock_bike(bike)}
       expect{station.dock_bike(bike)}.to raise_error("Unable to dock: docking station full")
       end
 
